@@ -12,67 +12,67 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTodo = exports.updateTodo = exports.addTodo = exports.getTodos = void 0;
+exports.deleteCommand = exports.updateCommand = exports.addCommand = exports.getCommands = void 0;
 const command_1 = __importDefault(require("../../models/command"));
-const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getCommands = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todos = yield command_1.default.find();
-        res.status(200).json({ todos });
+        const commands = yield command_1.default.find();
+        res.status(200).json({ commands });
     }
     catch (error) {
         throw error;
     }
 });
-exports.getTodos = getTodos;
-const addTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getCommands = getCommands;
+const addCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
-        const todo = new command_1.default({
+        const command = new command_1.default({
             name: body.name,
             description: body.description,
             status: body.status,
         });
-        const newTodo = yield todo.save();
-        const allTodos = yield command_1.default.find();
+        const newCommand = yield command.save();
+        const allCommands = yield command_1.default.find();
         res.status(201).json({
-            message: "Todo added successfully!",
-            todo: newTodo,
-            todos: allTodos,
+            message: "Command added successfully!",
+            command: newCommand,
+            commands: allCommands,
         });
     }
     catch (error) {
         throw error;
     }
 });
-exports.addTodo = addTodo;
-const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.addCommand = addCommand;
+const updateCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { params: { id }, body, } = req;
-        const updateTodo = yield command_1.default.findByIdAndUpdate({ _id: id }, body);
-        const allTodos = yield command_1.default.find();
+        const updateCommand = yield command_1.default.findByIdAndUpdate({ _id: id }, body);
+        const allCommands = yield command_1.default.find();
         res.status(200).json({
-            message: "Todo updated successfully!",
-            todo: updateTodo,
-            todos: allTodos,
+            message: "Command updated successfully!",
+            command: updateCommand,
+            commands: allCommands,
         });
     }
     catch (error) {
         throw error;
     }
 });
-exports.updateTodo = updateTodo;
-const deleteTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateCommand = updateCommand;
+const deleteCommand = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const deletedTodo = yield command_1.default.findByIdAndRemove(req.params.id);
-        const allTodos = yield command_1.default.find();
+        const deletedCommand = yield command_1.default.findByIdAndRemove(req.params.id);
+        const allCommands = yield command_1.default.find();
         res.status(200).json({
-            message: "Todo deleted succesfully!",
-            todo: deletedTodo,
-            todos: allTodos,
+            message: "Command deleted succesfully!",
+            command: deletedCommand,
+            commands: allCommands,
         });
     }
     catch (error) {
         throw error;
     }
 });
-exports.deleteTodo = deleteTodo;
+exports.deleteCommand = deleteCommand;

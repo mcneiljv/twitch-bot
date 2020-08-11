@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
-import todoRoutes from "./routes";
+import commandRoutes from "./routes";
 
 const app: Express = express();
 
@@ -15,7 +15,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(todoRoutes);
+app.use(commandRoutes);
 
 const uri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@graphql-api.7lvpz.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };

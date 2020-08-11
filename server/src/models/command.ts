@@ -1,7 +1,7 @@
-import { CommandInterface } from "./../types/todo";
+import { CommandInterface } from "../types/command";
 import { model, Schema } from "mongoose";
 
-const todoSchema: Schema = new Schema(
+const commandSchema: Schema = new Schema(
   {
     name: {
       type: String,
@@ -21,4 +21,4 @@ const todoSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<CommandInterface>("Todo", todoSchema);
+export default model<CommandInterface>("Command", commandSchema);
