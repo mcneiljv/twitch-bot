@@ -19,14 +19,21 @@ const AddCommand: React.FC<Props> = ({ saveCommand }) => {
       <div>
         <div>
           <label htmlFor="name">Command</label>
-          <input onChange={handleForm} type="text" id="name" />
+          <div className="ui input field">
+            <input onChange={handleForm} type="text" id="name" />
+          </div>
         </div>
         <div>
           <label htmlFor="description">Message</label>
-          <input onChange={handleForm} type="text" id="description" />
+          <div className="ui input field">
+            <input onChange={handleForm} type="text" id="description" />
+          </div>
         </div>
       </div>
-      <button disabled={formData === undefined ? true : false}>
+      <button
+        className="ui primary button"
+        disabled={formData === undefined ? true : false}
+      >
         Add Command
       </button>
     </form>

@@ -12,24 +12,39 @@ const Command: React.FC<Props> = ({
 }) => {
   const checkCommand: string = command.status ? `line-through` : "";
   return (
-    <div className="Card">
-      <div className="Card--text">
-        <h1 className={checkCommand}>{command.name}</h1>
-        <span className={checkCommand}>{command.description}</span>
+    <div className="ui four column doubling stackable grid">
+      <div className="column">
+        <div className="ui segment">
+          <h1 className={checkCommand}>{command.name}</h1>
+        </div>
       </div>
-      <div className="Card--button">
-        <button
-          onClick={() => updateCommand(command)}
-          className={command.status ? `hide-button` : "Card--button__done"}
-        >
-          Complete
-        </button>
-        <button
-          onClick={() => deleteCommand(command._id)}
-          className="Card--button__delete"
-        >
-          Delete
-        </button>
+
+      <div className="column">
+        <div className="ui segment">
+          <p className={checkCommand}>{command.description}</p>
+        </div>
+      </div>
+
+      <div className="column">
+        <div className="ui segment">
+          <button
+            onClick={() => updateCommand(command)}
+            className="positive ui button"
+          >
+            Complete &nbsp;<i className="edit icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div className="column">
+        <div className="ui segment">
+          <button
+            onClick={() => deleteCommand(command._id)}
+            className="negative ui button"
+          >
+            Delete &nbsp;<i className="cursor-pointer trash alternate icon"></i>
+          </button>
+        </div>
       </div>
     </div>
   );
