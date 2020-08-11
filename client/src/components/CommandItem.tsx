@@ -12,21 +12,17 @@ const Command: React.FC<Props> = ({
 }) => {
   const checkCommand: string = command.status ? `line-through` : "";
   return (
-    <div className="ui four column doubling stackable grid">
-      <div className="column">
-        <div className="ui segment">
+    <div className="ui vertically divided grid">
+      <div className="row">
+        <div className="four wide column">
           <h1 className={checkCommand}>{command.name}</h1>
         </div>
-      </div>
 
-      <div className="column">
-        <div className="ui segment">
+        <div className="four wide column">
           <p className={checkCommand}>{command.description}</p>
         </div>
-      </div>
 
-      <div className="column">
-        <div className="ui segment">
+        <div className="four wide column">
           <button
             onClick={() => updateCommand(command)}
             className="positive ui button"
@@ -34,10 +30,8 @@ const Command: React.FC<Props> = ({
             Complete &nbsp;<i className="edit icon"></i>
           </button>
         </div>
-      </div>
 
-      <div className="column">
-        <div className="ui segment">
+        <div className="four wide column">
           <button
             onClick={() => deleteCommand(command._id)}
             className="negative ui button"
