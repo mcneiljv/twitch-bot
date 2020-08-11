@@ -1,65 +1,70 @@
 import React, { useEffect, useState } from "react";
-import AddTodo from "./components/AddTodo";
-import TodoItem from "./components/TodoItem";
-import { getTodos, addTodo, updateTodo, deleteTodo } from "./API";
+import AddCommand from "./components/AddCommand";
+import Command from "./components/CommandItem";
+import { getCommands, addCommand, updateCommand, deleteCommand } from "./API";
 
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([]);
+  const [commands, setCommands] = useState<CommandInterface[]>([]);
 
   useEffect(() => {
-    fetchTodos();
+    fetchCommands();
   }, []);
 
-  const fetchTodos = (): void => {
-    getTodos()
-      .then(({ data: { todos } }: ITodo[] | any) => setTodos(todos))
+  const fetchCommands = (): void => {
+    getCommands()
+      .then(({ data: { commands } }: CommandInterface[] | any) =>
+        setCommands(commands)
+      )
       .catch((err: Error) => console.log(err));
   };
 
-  const handleSaveTodo = (e: React.FormEvent, formData: ITodo): void => {
+  const handleSaveCommand = (
+    e: React.FormEvent,
+    formData: CommandInterface
+  ): void => {
     e.preventDefault();
-    addTodo(formData)
+    addCommand(formData)
       .then(({ status, data }) => {
         if (status !== 201) {
-          throw new Error("Error! Todo was not saved.");
+          throw new Error("Error! Command was not saved.");
         }
-        setTodos(data.todos);
+        setCommands(data.commands);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleUpdateTodo = (todo: ITodo): void => {
-    updateTodo(todo)
+  const handleUpdateCommand = (command: CommandInterface): void => {
+    updateCommand(command)
       .then(({ status, data }) => {
         if (status !== 201) {
-          throw new Error("Error! Todo was not updated.");
+          throw new Error("Error! Command was not updated.");
         }
-        setTodos(data.todos);
+        setCommands(data.commands);
       })
       .catch((err) => console.log(err));
   };
 
-  const handleDeleteTodo = (_id: string): void => {
-    deleteTodo(_id)
+  const handledDeleteCommand = (_id: string): void => {
+    deleteCommand(_id)
       .then(({ status, data }) => {
         if (status !== 200) {
-          throw new Error("Error! Todo was not deleted.");
+          throw new Error("Error! Command was not deleted.");
         }
-        setTodos(data.todos);
+        setCommands(data.commands);
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <main className="App">
-      <h1>My Todos</h1>
-      <AddTodo saveTodo={handleSaveTodo} />
-      {todos.map((todo: ITodo) => (
-        <TodoItem
-          key={todo._id}
-          updateTodo={handleUpdateTodo}
-          deleteTodo={handleDeleteTodo}
-          todo={todo}
+      <h1>Commands</h1>
+      <AddCommand saveCommand={handleSaveCommand} />
+      {commands.map((command: CommandInterface) => (
+        <Command
+          key={command._id}
+          updateCommand={handleUpdateCommand}
+          deleteCommand={handledDeleteCommand}
+          command={command}
         />
       ))}
     </main>

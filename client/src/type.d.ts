@@ -1,4 +1,4 @@
-interface ITodo {
+interface CommandInterface {
   _id: string;
   name: string;
   description: string;
@@ -7,13 +7,13 @@ interface ITodo {
   updatedAt?: string;
 }
 
-interface TodoProps {
-  todo: ITodo;
+interface CommandProps {
+  command: CommandInterface;
 }
 
 type ApiDataType = {
   message: string;
   status: string;
-  todos: ITodo[];
-  todo?: ITodo;
+  commands: CommandInterface[];
+  command?: CommandInterface;
 };
