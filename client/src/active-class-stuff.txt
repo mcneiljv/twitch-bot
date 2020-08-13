@@ -1,0 +1,5 @@
+$: linkFocused = false
+
+className={`blah ${linkFocused ? 'active' : ''`}
+onFocus={() => linkFocused=true}
+onBlur={() => linkFocued=false}
